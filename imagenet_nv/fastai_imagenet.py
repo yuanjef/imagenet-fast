@@ -283,7 +283,9 @@ def main():
 
     if args.distributed:
         torch.cuda.set_device(args.gpu)
-        dist.init_process_group(backend=args.dist_backend, init_method=args.dist_url, world_size=args.world_size)
+        # need rank param!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        #dist.init_process_group(backend=args.dist_backend, init_method=args.dist_url, world_size=args.world_size)
+        dist.init_process_group(backend=args.dist_backend, init_method=args.dist_url, rank=args.rank, world_size=args.world_size)
 
     if args.fp16: assert torch.backends.cudnn.enabled, "fp16 mode requires cudnn backend to be enabled."
     if args.cycle_len > 1: args.cycle_len = int(args.cycle_len)
